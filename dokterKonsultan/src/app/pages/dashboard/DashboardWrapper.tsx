@@ -117,11 +117,11 @@ const DashboardWrapper: FC = () => {
   const intl = useIntl()
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", justifyContent: "center", marginBottom:'45%' }}>
       <h1>Dashboard</h1>
       </div>
-      <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
-      <DashboardPage />
+      {/* <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle> */}
+      {/* <DashboardPage /> */}
       
       
     </>

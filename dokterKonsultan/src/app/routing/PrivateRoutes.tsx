@@ -7,6 +7,7 @@ import {MenuTestPage} from '../pages/MenuTestPage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
+// import HeadLoketPage from '../pages/headLoket/HeadLoketPage'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -15,6 +16,7 @@ const PrivateRoutes = () => {
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
+  const HeadLoket = lazy(() => import('../pages/headLoket/HeadLoketPage'))
 
   return (
     <Routes>
@@ -23,7 +25,7 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
-        <Route path='kepalaLoket' element={ <AccountPage />} />
+        <Route path='kepalaLoket' element={ <HeadLoket />} />
         <Route path='petugasJR' element={<BuilderPageWrapper />} />
         <Route path='dk' element={<BuilderPageWrapper />} />
         <Route path='loket' element={ <AccountPage />} />
@@ -74,6 +76,14 @@ const PrivateRoutes = () => {
           element={
             <SuspensedView>
               <UsersPage />
+            </SuspensedView>
+          }
+        />
+         <Route
+          path='kepala-loket/*'
+          element={
+            <SuspensedView>
+              <HeadLoket />
             </SuspensedView>
           }
         />

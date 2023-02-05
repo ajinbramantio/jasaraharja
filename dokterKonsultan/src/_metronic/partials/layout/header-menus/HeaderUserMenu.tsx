@@ -15,12 +15,12 @@ const HeaderUserMenu: FC = () => {
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
-            <img alt='Logo' src={toAbsoluteUrl('/media/avatars/300-1.jpg')} />
+            <img alt='Logo' src={toAbsoluteUrl('/media/avatars/blank.png')} />
           </div>
 
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {currentUser?.first_name} {currentUser?.first_name}
+              {currentUser?.first_name} test
               <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
@@ -38,16 +38,16 @@ const HeaderUserMenu: FC = () => {
         </Link>
       </div>
 
-      <div className='menu-item px-5'>
+      {/* <div className='menu-item px-5'>
         <a href='#' className='menu-link px-5'>
           <span className='menu-text'>My Projects</span>
           <span className='menu-badge'>
             <span className='badge badge-light-danger badge-circle fw-bolder fs-7'>3</span>
           </span>
         </a>
-      </div>
+      </div> */}
 
-      <div
+      {/* <div
         className='menu-item px-5'
         data-kt-menu-trigger='hover'
         data-kt-menu-placement='left-start'
@@ -115,7 +115,7 @@ const HeaderUserMenu: FC = () => {
 
       <div className='separator my-2'></div>
 
-      <Languages />
+      <Languages /> */}
 
       <div className='menu-item px-5 my-1'>
         <Link to='/crafted/account/settings' className='menu-link px-5'>
