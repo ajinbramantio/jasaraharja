@@ -4,9 +4,13 @@ import {useIntl} from 'react-intl'
 import {KTSVG} from '../../../../helpers'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
 import {SidebarMenuItem} from './SidebarMenuItem'
+import { useAuth } from '../../../../../app/modules/auth'
 
 const SidebarMenuMain = () => {
   const intl = useIntl()
+  const auth = useAuth()
+  console.log(auth);
+  
 
   return (
     <>
@@ -16,13 +20,13 @@ const SidebarMenuMain = () => {
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
-      <SidebarMenuItem
+      {auth.currentUser?.role === "kepala loket" || auth.currentUser?.role === "administrator" ?<SidebarMenuItem
         to='/kepalaLoket'
         icon='/media/icons/duotune/general/gen019.svg'
         title='Kepala Loket'
         fontIcon='bi-layers'
-      />
-      <SidebarMenuItemWithSub to='/crafted/pages/wizards'
+      />:null}
+      {auth.currentUser?.role === "petugas jr" || auth.currentUser?.role === "administrator"?<SidebarMenuItemWithSub to='/crafted/pages/wizards'
         icon='/media/icons/duotune/general/gen019.svg' fontIcon='bi-layers' title='PetugasJR'>
           <SidebarMenuItem
             to='/crafted/pages/wizards/horizontal'
@@ -30,21 +34,30 @@ const SidebarMenuMain = () => {
             hasBullet={true}
           />
           <SidebarMenuItem to='/crafted/pages/wizards/vertical' title='Upload Document' hasBullet={true} />
-        </SidebarMenuItemWithSub>
-      <SidebarMenuItem
+      </SidebarMenuItemWithSub>:null}
+      
+      {auth.currentUser?.role === "dokter" || auth.currentUser?.role === "administrator"?  <SidebarMenuItem
         // to='/dk'
         to='/apps/user-management/users'
         icon='/media/icons/duotune/general/gen019.svg'
         title='Dokter Konsultan'
         fontIcon='bi-layers'
-      />
-      <SidebarMenuItem
+      />:null}
+      {auth.currentUser?.role === "kepala loket" || auth.currentUser?.role === "loket" || auth.currentUser?.role === "administrator"? <SidebarMenuItem
         to='/loket'
         icon='/media/icons/duotune/general/gen019.svg'
         title='Loket'
         fontIcon='bi-layers'
-      />
-      <div className='menu-item'>
+      /> : null}
+      {auth.currentUser?.role === "administrator" ?<SidebarMenuItem
+        to='/Registation'
+        icon='/media/icons/duotune/general/gen019.svg'
+        title='Registation'
+        fontIcon='bi-layers'
+      />:null}
+       
+      
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Crafted</span>
         </div>
@@ -119,7 +132,7 @@ const SidebarMenuMain = () => {
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
         </div>
-      </div>
+      </div> */}
       {/* <SidebarMenuItemWithSub
         to='/apps/chat'
         title='Chat'

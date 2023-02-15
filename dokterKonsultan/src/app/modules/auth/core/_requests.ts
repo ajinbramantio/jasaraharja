@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {AuthModel, UserModel} from './_models'
+import { AuthModel, UserModel } from './_models'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -19,23 +19,25 @@ export function login(email: string, password: string) {
 // Server should return AuthModel
 export function register(
   email: string,
-  firstname: string,
-  lastname: string,
+  name: string,
+  role: string,
+  idCard: string,
   password: string,
   password_confirmation: string
 ) {
   return axios.post(REGISTER_URL, {
     email,
-    first_name: firstname,
-    last_name: lastname,
+    name,
+    role,
+    idCard,
     password,
-    password_confirmation,
+    password_confirmation
   })
 }
 
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
-  return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
+  return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
     email,
   })
 }

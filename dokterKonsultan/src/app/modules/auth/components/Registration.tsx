@@ -16,7 +16,7 @@ const initialValues = {
   role:'',
   email: '',
   password: '',
-  changepassword: '',
+  password_confirmation: '',
   acceptTerms: false,
 }
 
@@ -42,7 +42,7 @@ const registrationSchema = Yup.object().shape({
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Password is required'),
-  changepassword: Yup.string()
+  password_confirmation: Yup.string()
     .required('Password confirmation is required')
     .when('password', {
       is: (val: string) => (val && val.length > 0 ? true : false),
@@ -68,6 +68,7 @@ export function Registration() {
           values.role,
           values.idCard,
           values.password,
+          values.password_confirmation
         )
         saveAuth(auth)
         const {data: user} = await getUserByToken(auth.api_token)
@@ -96,21 +97,20 @@ export function Registration() {
       {/* begin::Heading */}
       <div className='text-center mb-11'>
         {/* begin::Title */}
-        <h1 className='text-dark fw-bolder mb-3'>Sign Up</h1>
+        <h1 className='text-dark fw-bolder mb-3'>Register</h1>
         {/* end::Title */}
       </div>
       {/* end::Heading */}
 
-      <div className='separator separator-content my-14'>
+      {/* <div className='separator separator-content my-14'>
         <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
-      </div>
+      </div> */}
 
       {formik.status && (
         <div className='mb-lg-15 alert alert-danger'>
           <div className='alert-text font-weight-bold'>{formik.status}</div>
         </div>
       )}
-
       {/* begin::Form group name */}
       <div className='fv-row mb-8'>
         <label className='form-label fw-bolder text-dark fs-6'>Name</label>
@@ -250,21 +250,21 @@ export function Registration() {
           type='password'
           placeholder='Password confirmation'
           autoComplete='off'
-          {...formik.getFieldProps('changepassword')}
+          {...formik.getFieldProps('password_confirmation')}
           className={clsx(
             'form-control bg-transparent',
             {
-              'is-invalid': formik.touched.changepassword && formik.errors.changepassword,
+              'is-invalid': formik.touched.password_confirmation && formik.errors.password_confirmation,
             },
             {
-              'is-valid': formik.touched.changepassword && !formik.errors.changepassword,
+              'is-valid': formik.touched.password_confirmation && !formik.errors.password_confirmation,
             }
           )}
         />
-        {formik.touched.changepassword && formik.errors.changepassword && (
+        {formik.touched.password_confirmation && formik.errors.password_confirmation && (
           <div className='fv-plugins-message-container'>
             <div className='fv-help-block'>
-              <span role='alert'>{formik.errors.changepassword}</span>
+              <span role='alert'>{formik.errors.password_confirmation}</span>
             </div>
           </div>
         )}

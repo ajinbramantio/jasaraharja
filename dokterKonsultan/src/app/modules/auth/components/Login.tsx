@@ -7,6 +7,8 @@ import {useFormik} from 'formik'
 import {getUserByToken, login} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
+import { AUTH_LOCAL_STORAGE_KEY } from '../core/AuthHelpers'
+import users from './DataDummy'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,10 +43,17 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
-        const {data: auth} = await login(values.email, values.password)
+       const member = users.filter(e => e.email === values.email)
+        const value = JSON.stringify(member[0])
+        localStorage.setItem(AUTH_LOCAL_STORAGE_KEY, value)
+        const auth = JSON.parse(value)
+        // const {data: auth} = await login(values.email, values.password)
         saveAuth(auth)
-        const {data: user} = await getUserByToken(auth.api_token)
-        setCurrentUser(user)
+        // const { data: user } = await getUserByToken(auth.api_token)
+        const { data: user } = auth
+        // console.log(user);
+        console.log(auth);
+        setCurrentUser(auth)
       } catch (error) {
         console.error(error)
         saveAuth(undefined)

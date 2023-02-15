@@ -13,7 +13,7 @@ import {AuthModel, UserModel} from './_models'
 import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
 import {WithChildren} from '../../../../_metronic/helpers'
-
+import users from '../components/DataDummy'
 type AuthContextProps = {
   auth: AuthModel | undefined
   saveAuth: (auth: AuthModel | undefined) => void
@@ -69,9 +69,12 @@ const AuthInit: FC<WithChildren> = ({children}) => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken)
+          const { data } = await getUserByToken(apiToken)
+          const member = users.filter(e => e.email === data.email)
+          const value = JSON.stringify(member[0])
+          const parse = JSON.parse(value)        
           if (data) {
-            setCurrentUser(data)
+            setCurrentUser(parse)
           }
         }
       } catch (error) {

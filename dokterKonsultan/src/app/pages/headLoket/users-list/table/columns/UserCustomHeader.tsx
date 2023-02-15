@@ -10,7 +10,9 @@ type Props = {
   title?: string
   tableProps: PropsWithChildren<HeaderProps<User>>
 }
-const UserCustomHeader: FC<Props> = ({className, title, tableProps}) => {
+const UserCustomHeader: FC<Props> = ({ className, title, tableProps }) => {
+  console.log(tableProps);
+  
   const id = tableProps.column.id
   const {state, updateState} = useQueryRequest()
 

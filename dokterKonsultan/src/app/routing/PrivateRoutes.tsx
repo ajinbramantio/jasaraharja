@@ -8,6 +8,7 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
 // import HeadLoketPage from '../pages/headLoket/HeadLoketPage'
+import { Registration } from '../modules/auth/components/Registration'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -17,6 +18,8 @@ const PrivateRoutes = () => {
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
   const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
   const HeadLoket = lazy(() => import('../pages/headLoket/HeadLoketPage'))
+  // const Registation = lazy(() => import('../modules/auth/components/Registration'))
+  
 
   return (
     <Routes>
@@ -30,6 +33,7 @@ const PrivateRoutes = () => {
         <Route path='dk' element={<BuilderPageWrapper />} />
         <Route path='loket' element={ <AccountPage />} />
         <Route path='menu-test' element={<MenuTestPage />} />
+        <Route path='registation' element={<Registration />} />
         {/* Lazy Modules */}
         <Route
           path='crafted/pages/profile/*'
